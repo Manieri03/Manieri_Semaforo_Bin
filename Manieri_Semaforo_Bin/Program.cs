@@ -10,6 +10,7 @@ namespace Manieri_Semaforo_Bin
     class Program
     {
         private static int n;
+        static SemaphoreSlim s1 = new SemaphoreSlim(1);
         static void Main(string[] args)
         {
 
@@ -30,14 +31,18 @@ namespace Manieri_Semaforo_Bin
         {
             for(int i=0; i <= 1000000; i++)
             {
+                s1.Wait();
                 n++;
+                s1.Release();
             }
         }
         private static void Decrementa()
         {
             for (int i = 0; i <= 1000000; i++)
             {
+                s1.Wait();
                 n--;
+                s1.Release();
             }
         }
     }
